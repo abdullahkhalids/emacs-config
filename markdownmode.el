@@ -40,6 +40,15 @@ function focusChecker() {
 }
 </script>
 
+<style type='text/css'>
+
+body {
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 10em;
+}
+</style>
+
 ")
 
 ;; open preview in firefox
@@ -53,3 +62,30 @@ function focusChecker() {
 (defun no-open (file)
   'nil)
 (setq markdown-live-preview-window-function #'no-open)
+
+
+;; Latex functions
+
+(defun latex-insert-env (env)
+  "Adds empty environment block."
+  (interactive "MEnvironment: ")
+  (insert "\\begin{" env "}\n\n\\end{" env "}")
+  (forward-line -1))
+
+(define-key markdown-mode-map (kbd "C-c C-e") 'latex-insert-env)
+
+(defun latex-insert-math-block ()
+  "Adds empty $$ block."
+  (interactive)
+  (insert "$$\n\n$$")
+  (forward-line -1))
+
+(define-key markdown-mode-map (kbd "C-c C-m") 'latex-insert-math-block)
+
+
+
+
+
+
+
+
